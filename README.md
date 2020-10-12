@@ -1,5 +1,5 @@
 <h1 align="center"> Egy Maszk érzékelős ajtó/jelző rendszer  </h1>
-<h2 align="center"> Egy projekt a  <a href="https://verseny.c3.hu>C3 versenyére </a></h2>
+<a href="https://verseny.c3.hu><h2 align="center"> Egy projekt a  C3 versenyére</h2> </a>
 Itt a nyakunkon a második hullám.
 A kormány rendeleteket hozott. Kötelező a maszkviselés a tömegközlekedési eszközökön, üzletekben, moziban, és sok helyen az iskolákban is.  
 
