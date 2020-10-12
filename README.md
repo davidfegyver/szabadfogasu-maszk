@@ -22,3 +22,55 @@ Ez biztonságosabbá teszi az dolgozók munkáját, és az emberek életét.
 * Arduino alapú riasztó ami bekapcsol ha nincs rajtad maszk
 
 Ez a projekt felhasználható rengeteg más projekthez is, sőt még [Raspberry Pire (3/4)](https://www.raspberrypi.org/) vagy [Nvidia Jetsonra](https://www.nvidia.com/en-us/autonomous-machines/embedded-systems/jetson-nano/) is felteheted!
+
+## :robot: Telepítés
+
+Minden telepítendő könyvtár fel van sorolva a  [`requirements.txt`](https://github.com/davidfegyver/szabadfogasu-maszk/blob/main/requirements.txt)ben.
+
+0. Nyiss meg egy terminált/parancssort.
+
+1. Töltsd le a repot.
+```
+$ git clone https://github.com/davidfegyver/szabadfogasu-maszk/
+```
+
+2. Lépj be a letöltött mappába: 
+```
+$ cd szabadfogasu-maszk/
+```
+
+3. Most írd be ezt hogy telepítsd a szükséges könyvtárakat. Ez lehet sok idő lesz a neted sebességétől függően.
+```
+$ pip3 install -r requirements.txt
+
+```
+#### Arduino beállítása
+Töltsd fel ezt a kódot: [`maszk.ino`](https://github.com/davidfegyver/szabadfogasu-maszk/blob/main/arduino/maszk.ino)
+
+
+
+## :bulb: Futtatás
+
+1. Nyisd meg a terminált, lépj be a letöltött mappába, és futtasd ezt a parancsot:
+```
+$ python3 maskdetector.py
+```
+
+Válaszolj a megadott kérdésekre(Van-e arduinod? Ha igen, mi a portja?), és várd meg amíg elindul a program. Ha minden sikeres akkor be fog jönni a kamerád képe, és láthatod hogy van-e rajtad maszk.
+
+## Képek
+
+
+
+## 🎉 Köszi hogy végignézted
+Ha bármi problémád akadt akkor kérlek írj nekem egy emailt: `fegyverdavid.bator@gmail.com` vagy nyiss egy Issuet itt: [Szabadfogasu-maszk](https://github.com/davidfegyver/szabadfogasu-maszk/issues)
+
+## :handshake: Hozzájárulás
+Ha lenne valami ötleted, vagy kijavítanál egy bugot akkor nyiss egy **Pull requestet**. 
+
+**Ha tetszett a projekt adhadsz is egy csillagot :D**
+
+## 📝 Liszensz
+
+**GNU GPLv3**
+https://choosealicense.com/licenses/gpl-3.0/
