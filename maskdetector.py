@@ -90,7 +90,8 @@ while True:
 	if len(faces) > 0:
 		faces = np.array(faces, dtype="float32")
 		predictions = maskDetector.predict(faces, batch_size=32)
-
+	else:
+		s.write('2'.encode())
 	#show fps
 	fps_str = "FPS: %.2f" % (1 / (time.time() - start))
 	start = time.time()
