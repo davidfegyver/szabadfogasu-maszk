@@ -12,15 +12,17 @@ import time
 import cv2
 import os
 #import serial and start serial communication
-import serial
-s = serial.Serial(input("Arduino portja"), 9600, timeout=5) ## Itt a portot át kéne
+arduino = True if input("Van arduinod? (i/n)")=='i' else False
+if arduino:
+	import serial
+	s = serial.Serial(input("Arduino portja"), 9600, timeout=5) 
 
 #Simple logger library :D 
 class logger:
     INFO = '\033[94m [INFO] '
-    OK = '\033[92m [OK]'
-    WARNING = '\033[93m [WARN]'
-    FAIL = '\033[91m [FAIL]'
+    OK = '\033[92m [OK] '
+    WARNING = '\033[93m [WARN] '
+    FAIL = '\033[91m [FAIL] '
     END = '\033[0m'
 
 #Loading things up
@@ -55,7 +57,6 @@ while True:
 
 	#pass the blob through the network 
 
-	#Thanks to: https://github.com/gopinath-balu/computer_vision/blob/master/CAFFE_DNN/detect_faces.py
 	faceDetector.setInput(blob)
 	detections = faceDetector.forward()
 
@@ -91,7 +92,8 @@ while True:
 		faces = np.array(faces, dtype="float32")
 		predictions = maskDetector.predict(faces, batch_size=32)
 	else:
-		s.write('2'.encode())
+		if arduino:
+			s.write('2'.encode())
 	#show fps
 	fps_str = "FPS: %.2f" % (1 / (time.time() - start))
 	start = time.time()
@@ -108,10 +110,11 @@ while True:
 		color = (0, 255, 0) if havemask else (0, 0, 255)
 
 		#send data to arduino
-		if havemask:
-			s.write('1'.encode()) 
-		else:
-			s.write('0'.encode())
+		if arduino:
+			if havemask:
+				s.write('1'.encode()) 
+			else:
+				s.write('0'.encode())
 		
 		label = "{}: {:.2f}%".format(label, max(mask, withoutMask) * 100)
 
