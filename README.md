@@ -10,12 +10,6 @@ Ez a maszk érzékelős ajtó megakadályozza a koronavírussal nem törődő em
 Így nem kell a biztonsági őröknek ezekre az emberekre figyelni. 
 Ez biztonságosabbá teszi az dolgozók munkáját, és az emberek életét.
 
-## 🖥️ Felhasznált könyvtárak/projektek
-
-- [OpenCV](https://opencv.org/)
-- [Caffee alapú arc érzékelő](https://github.com/opencv/opencv/blob/3.4.0/samples/dnn/resnet_ssd_face_python.py)
-- [Keras](https://keras.io/)
-- [TensorFlow](https://www.tensorflow.org/)
 
 ## :star: Funkciók
 * Maszk érzékelés
@@ -46,9 +40,10 @@ $ cd szabadfogasu-maszk/
 $ pip3 install -r requirements.txt
 
 ```
-#### Arduino beállítása
+#### Arduino beállítása (Nem kötelező)
 Töltsd fel ezt a kódot: [`maszk.ino`](https://github.com/davidfegyver/szabadfogasu-maszk/blob/main/arduino/maszk.ino)
-
+Építs egy ilyesmi áramkört
+![arduino schema](https://github.com/davidfegyver/szabadfogasu-maszk/blob/main/arduino/schema.png)
 
 
 ## :bulb: Futtatás
@@ -62,7 +57,18 @@ Válaszolj a megadott kérdésekre(Van-e arduinod? Ha igen, mi a portja?), és v
 
 ## Képek
 
+TODO
 
+## 🖥️ Felhasznált könyvtárak/projektek
+
+- [OpenCV](https://opencv.org/)
+- [Caffee alapú arc érzékelő](https://github.com/opencv/opencv/blob/3.4.0/samples/dnn/resnet_ssd_face_python.py)
+- [Keras](https://keras.io/)
+- [TensorFlow](https://www.tensorflow.org/)
+
+## TODO:
+  * Hőmérés
+  * További ötletek jöhetnek pull requestben :)
 
 ## 🎉 Köszi hogy végignézted
 Ha bármi problémád akadt akkor kérlek írj nekem egy emailt: `fegyverdavid.bator@gmail.com` vagy nyiss egy Issuet itt: [Szabadfogasu-maszk](https://github.com/davidfegyver/szabadfogasu-maszk/issues)
