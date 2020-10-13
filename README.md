@@ -72,6 +72,7 @@ TODO
 
 ## 🎉 Köszi hogy végignézted
 Ha bármi problémád akadt akkor kérlek írj nekem egy emailt: `fegyverdavid.bator@gmail.com` vagy nyiss egy Issuet itt: [Szabadfogasu-maszk](https://github.com/davidfegyver/szabadfogasu-maszk/issues)
+![](https://komarev.com/ghpvc/?username=szabadfogasumaszkprojekt&color=lightgreen)
 
 ## :handshake: Hozzájárulás
 Ha lenne valami ötleted, vagy kijavítanál egy bugot akkor nyiss egy **Pull requestet**. 
