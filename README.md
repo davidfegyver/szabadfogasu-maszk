@@ -54,9 +54,8 @@ $ python3 maskdetector.py
 
 Válaszolj a megadott kérdésekre(Van-e arduinod? Ha igen, mi a portja?), és várd meg amíg elindul a program. Ha minden sikeres akkor be fog jönni a kamerád képe, és láthatod hogy van-e rajtad maszk.
 
-## Képek
-
-TODO
+## Bemutató videó
+https://www.youtube.com/watch?v=eLyNWEL1Los
 
 ## 🖥️ Felhasznált könyvtárak/projektek
 
