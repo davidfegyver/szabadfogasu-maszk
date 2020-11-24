@@ -1,7 +1,7 @@
 # <p align="center"> Egy Maszk érzékelős ajtó/jelző rendszer  </p>
 ## <p align="center"> Egy projekt a  C3 versenyére</p>
 
-| <img src="https://github.com/davidfegyver/szabadfogasu-maszk/blob/main/c3verseny.png" width="250"/> | :star::star: Nyerteem Teszt |
+<img src="https://github.com/davidfegyver/szabadfogasu-maszk/blob/main/c3verseny.png" width="250"/> <h3>:star::star: Nyerteem Teszt</h3>
 Itt a nyakunkon a második hullám.
 A kormány rendeleteket hozott. Kötelező a maszkviselés a tömegközlekedési eszközökön, üzletekben, moziban, és sok helyen az iskolákban is.  
 
