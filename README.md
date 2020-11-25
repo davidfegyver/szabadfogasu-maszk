@@ -83,5 +83,5 @@ Ha lenne valami ötleted, vagy kijavítanál egy bugot akkor nyiss egy **Pull re
 
 ## 📝 Liszensz
 
-**GNU GPLv3**
-https://choosealicense.com/licenses/gpl-3.0/
+**MIT**
+https://choosealicense.com/licenses/mit/
