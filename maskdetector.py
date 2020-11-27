@@ -48,6 +48,10 @@ print(logger.OK+"Done"+logger.END)
 start = time.time()
 while True:
 	frame=vs.read() #read the camera
+	if frame is None:
+		print(logger.WARNING+"The video frame is None. Check your input."+logger.END)
+		time.sleep(1)
+		continue
 	frame = imutils.resize(frame, width=400) # resize for better fps
 
 	#make a blob from the camera for the face detector
@@ -79,7 +83,11 @@ while True:
 			#grab the face and convert to rgb (because the predictor can only process rgb)
 			#and resize it
 			face = frame[startY:endY, startX:endX]
-			face = cv2.cvtColor(face, cv2.COLOR_BGR2RGB)
+			try:
+				face = cv2.cvtColor(face, cv2.COLOR_BGR2RGB)
+			except:
+				print(logger.WARNING+"!_src.empty() -- Check your input."+logger.END)
+				continue
 			face = cv2.resize(face, (224, 224))
 			face = img_to_array(face)
 			face = preprocess_input(face)
