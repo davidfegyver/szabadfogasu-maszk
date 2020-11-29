@@ -20,8 +20,8 @@ parser.add_argument("--arduino","-a", dest='COM',help="the com port of the ardui
 args = parser.parse_args()
 
 #import serial and start serial communication
-if args.arduino is not None:
-	s = serial.Serial(args.arduino, 9600, timeout=5) 
+if args.COM is not None:
+	s = serial.Serial(args.COM, 9600, timeout=5) 
 
 #Simple logger library :D 
 class logger:
@@ -106,7 +106,7 @@ while True:
 		faces = np.array(faces, dtype="float32")
 		predictions = maskDetector.predict(faces, batch_size=32)
 	else:
-		if args.arduino is not None:
+		if args.COM is not None:
 			s.write('2'.encode())
 	#show fps
 	fps_str = "FPS: %.2f" % (1 / (time.time() - start))
@@ -124,7 +124,7 @@ while True:
 		color = (0, 255, 0) if havemask else (0, 0, 255)
 
 		#send data to arduino
-		if args.arduino is not None:
+		if args.COM is not None:
 			if havemask:
 				s.write('1'.encode()) 
 			else:
