@@ -55,8 +55,12 @@ Töltsd fel ezt a kódot: [`maszk.ino`](https://github.com/davidfegyver/szabadfo
 ```
 $ python3 maskdetector.py
 ```
+Ha van arduinod, add hozzá ezt: -a COM4 (comport száma)
+```
+$ python3 maskdetector.py -a COM4
+```
 
-Válaszolj a megadott kérdésekre(Van-e arduinod? Ha igen, mi a portja?), és várd meg amíg elindul a program. Ha minden sikeres akkor be fog jönni a kamerád képe, és láthatod hogy van-e rajtad maszk.
+Várd meg amíg elindul a program. Ha minden sikeres akkor be fog jönni a kamerád képe, és láthatod hogy van-e rajtad maszk.
 
 ## Bemutató videó
 https://www.youtube.com/watch?v=eLyNWEL1Los
