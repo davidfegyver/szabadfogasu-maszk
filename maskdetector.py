@@ -15,47 +15,52 @@ import cv2
 import os
 
 parser = argparse.ArgumentParser()
-
 parser.add_argument("--arduino","-a", dest='COM',help="the com port of the arduino, ex: com4")
 args = parser.parse_args()
 
+print(args)
 #import serial and start serial communication
 if args.COM is not None:
 	s = serial.Serial(args.COM, 9600, timeout=5) 
 
 #Simple logger library :D 
-class logger:
-    INFO = '\033[94m [INFO] '
-    OK = '\033[92m [OK] '
-    WARNING = '\033[93m [WARN] '
-    FAIL = '\033[91m [FAIL] '
-    END = '\033[0m'
+class Logger:
+	def info(self,text,idk = False):
+		print('\033[94m [INFO] '+text+'\033[0m',end='' if idk else '\n')
+	def ok(self,text,idk = False):
+		print('\033[92m [OK] '+text+'\033[0m',end='' if idk else '\n')
+	def warn(self,text,idk = False):
+		print('\033[93m [WARN] '+text+'\033[0m',end='' if idk else '\n')	
+	def fail(self,text,idk = False):
+		print('\033[91m [FAIL] '+text+'\033[0m',end='' if idk else '\n')		
+logger = Logger()
 
 #Loading things up
-print(logger.INFO+"Loading Face Detector... "+logger.END,end="")
+logger.info("Loading Face Detector... ",True)
 faceDetector = cv2.dnn.readNet("./face_detector/deploy.prototxt", "./face_detector/res10_300x300_ssd_iter_140000.caffemodel")
-print(logger.OK+"Done"+logger.END)
+logger.ok("Done")
 
 
-print(logger.INFO+"Loading Mask Detector... "+logger.END)
+logger.info("Loading Mask Detector... ")
 paths = [os.path.join("./models", path) for path in os.listdir("./models")]
 latest = sorted(paths, key=os.path.getmtime)[-1]
-print(logger.INFO+f"Latest model path: {latest}"+logger.END)
+
+logger.info(f"Latest model path: {latest}")
 maskDetector = load_model(latest)
-print(logger.OK+"Done"+logger.END)
+logger.ok("Done")
 
 
-print(logger.INFO+"Starting video capture..."+logger.END,end="")
+logger.info("Starting video capture...",True)
 vs = VideoStream(src=0).start()
 time.sleep(2.0)
-print(logger.OK+"Done"+logger.END)
+logger.ok("Done")
 
 #check starting time for fps counting
 start = time.time()
 while True:
 	frame=vs.read() #read the camera
 	if frame is None:
-		print(logger.WARNING+"The video frame is None. Check your input."+logger.END)
+		logger.warn("The video frame is None. Check your input.")
 		time.sleep(1)
 		continue
 	frame = imutils.resize(frame, width=400) # resize for better fps
@@ -92,7 +97,7 @@ while True:
 			try:
 				face = cv2.cvtColor(face, cv2.COLOR_BGR2RGB)
 			except:
-				print(logger.WARNING+"!_src.empty() -- Check your input."+logger.END)
+				logger.warn("!_src.empty() -- Check your input.")
 				continue
 			face = cv2.resize(face, (224, 224))
 			face = img_to_array(face)
