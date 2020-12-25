@@ -57,21 +57,23 @@ logger.ok("Done")
 
 #check starting time for fps counting
 start = time.time()
+
 while True:
+
 	frame=vs.read() #read the camera
 	if frame is None:
 		logger.warn("The video frame is None. Check your input.")
 		time.sleep(1)
 		continue
+
 	frame = imutils.resize(frame, width=400) # resize for better fps
 
-	#make a blob from the camera for the face detector
-	(h, w) = frame.shape[:2]
-	blob = cv2.dnn.blobFromImage(frame, 1.0, (300, 300),
-		(104.0, 177.0, 123.0))
+	(height, width) = frame.shape[:2]
+
+
+	blob = cv2.dnn.blobFromImage(frame, 1.0, (300,300), (104.0, 177.0, 123.0)) 	#make a blob from the camera pic for the face detector
 
 	#pass the blob through the network 
-
 	faceDetector.setInput(blob)
 	detections = faceDetector.forward()
 
@@ -79,17 +81,19 @@ while True:
 	locations = []
 	predictions = []
 
+
 	#process the faces to arrays
 	for i in range(0, detections.shape[2]):
 		confidence = detections[0, 0, i, 2]
-
+		
 		if confidence > 0.5:
-
-			box = detections[0, 0, i, 3:7] * np.array([w, h, w, h])
-			(startX, startY, endX, endY) = box.astype("int")
+			(startX, startY, endX, endY) = np.multiply(
+				detections[0, 0, i, 3:7],
+				[width, height, width, height]
+			).astype("int") #get the bounding box of the face
 
 			(startX, startY) = (max(0, startX), max(0, startY))
-			(endX, endY) = (min(w - 1, endX), min(h - 1, endY))
+			(endX, endY) = (min(width - 1, endX), min(height - 1, endY))
 
 			#grab the face and convert to rgb (because the predictor can only process rgb)
 			#and resize it
@@ -113,14 +117,15 @@ while True:
 	else:
 		if args.COM is not None:
 			s.write('2'.encode())
+
 	#show fps
 	fps_str = "FPS: %.2f" % (1 / (time.time() - start))
 	start = time.time()
 	cv2.putText(frame, fps_str, (25, 25), cv2.FONT_HERSHEY_SIMPLEX, 0.45, (255,0, 0), 2)
 
 	#loop through all faces and add it to the end photo
-	for (locs, preds) in zip(locations, predictions):
-		(aX, aY, bX, bY) = locs
+	for (box, preds) in zip(locations, predictions):
+		(aX, aY, bX, bY) = box
 		(mask, withoutMask) = preds
 
 		havemask = mask > withoutMask
@@ -130,10 +135,7 @@ while True:
 
 		#send data to arduino
 		if args.COM is not None:
-			if havemask:
-				s.write('1'.encode()) 
-			else:
-				s.write('0'.encode())
+			s.write('1' if havemask else '0'.encode()) 
 		
 		label = "{}: {:.2f}%".format(label, max(mask, withoutMask) * 100)
 
