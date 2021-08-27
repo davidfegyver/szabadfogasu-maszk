@@ -1,4 +1,4 @@
-[Switch back to Hungarian :hungary:](https://https://github.com/davidfegyver/szabadfogasu-maszk/blob/main/README.md)
+[Switch back to Hungarian :hungary:](https://github.com/davidfegyver/szabadfogasu-maszk/blob/main/README.md)
 # <p align="center"> Egy Maszk érzékelős ajtó/jelző rendszer (Maszkimum) </p>
 ## <p align="center"> Egy projekt a  C3 Szabadfogású Számítógép versenyére<p>
 <img src="https://github.com/davidfegyver/szabadfogasu-maszk/blob/main/c3verseny.png" width="250"/>
