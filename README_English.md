@@ -1,6 +1,6 @@
 [Switch back to Hungarian :hungary:](https://github.com/davidfegyver/szabadfogasu-maszk/blob/main/README.md)
-# <p align="center"> Egy Maszk érzékelős ajtó/jelző rendszer (Maszkimum) </p>
-## <p align="center"> Egy projekt a  C3 Szabadfogású Számítógép versenyére<p>
+# <p align="center"> Door opening/alarming system with mask-detection (Maszkimum) </p>
+## <p align="center"> A project for the Szabadfogású Számítógép competition of C3<p>
 <img src="https://github.com/davidfegyver/szabadfogasu-maszk/blob/main/c3verseny.png" width="250"/>
 
 ### :star::star: I won the competition!!
@@ -21,7 +21,7 @@ This makes our life safer.
 * Arduino-based leds (Red - no mask; Green - wearing mask (in case, the door is opening))
 * Arduino-based alarm, which turns on if you don't have a mask on
 
-This project can also be used in many other project, you can even upload it to [Raspberry Pi](https://www.raspberrypi.org/) or to [Nvidia Jetson](https://www.nvidia.com/en-us/autonomous-machines/embedded-systems/jetson-nano/)
+This projects can also be used in many other project, you can even upload it to [Raspberry Pi](https://www.raspberrypi.org/) or to [Nvidia Jetson](https://www.nvidia.com/en-us/autonomous-machines/embedded-systems/jetson-nano/)
 
 ## :robot: Installation
 
