@@ -23,7 +23,7 @@ Ez a projekt felhasználható rengeteg más projektben is, sőt még [Raspberry 
 
 ## :robot: Telepítés
 
-Minden telepítendő könyvtár fel van sorolva a  [`requirements.txt`](https://github.com/davidfegyver/szabadfogasu-maszk/blob/main/requirements.txt)ben.
+Minden telepítendő könyvtár fel van sorolva a [`requirements.txt`](https://github.com/davidfegyver/szabadfogasu-maszk/blob/main/requirements.txt) ben.
 
 0. Nyiss meg egy terminált/parancssort.
 
