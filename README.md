@@ -48,6 +48,26 @@ Töltsd fel ezt a kódot: [`maszk.ino`](https://github.com/davidfegyver/szabadfo
 Építs egy ilyesmi áramkört:
 ![arduino schema](https://github.com/davidfegyver/szabadfogasu-maszk/blob/main/arduino/schema.png)
 
+#### Webes API használata
+A webes API-ból adatokat lekérni JSON formázással lehet az `5000`-es porton. A webes API kétféle formátumot támogat: a `prettyStatus`, és a `shortStatus` formátumot
+
+Példák a JQ JSON feldolgozóval GNU/Linux alatt:
+
+```bash
+$ curl -s http://localhost:5000 | jq .prettyStatus
+```
+
+Kimenet:
+
+`Not wearing mask`
+
+```bash
+$ curl -s http://localhost:5000 | jq .shortStatus
+```
+
+Kimenet:
+
+`False`
 
 ## :bulb: Futtatás
 

@@ -50,6 +50,26 @@ Download the source code for your Arduino: [`maszk.ino`](https://github.com/davi
 And build a circuit like that:
 ![arduino schema](https://github.com/davidfegyver/szabadfogasu-maszk/blob/main/arduino/schema.png)
 
+#### Webes API használata
+You can obtain JSON code from the web API at the port `5000`. The web API supports two different styling method: `prettyStatus`, and `shortStatus`.
+
+Examples with the JSON processor called `JQ` in a GNU/Linux-based system:
+
+```bash
+$ curl -s http://localhost:5000 | jq .prettyStatus
+```
+
+Output:
+
+`Not wearing mask`
+
+```bash
+$ curl -s http://localhost:5000 | jq .shortStatus
+```
+
+Output:
+
+`False`
 
 ## :bulb: Running
 
