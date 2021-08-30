@@ -14,6 +14,23 @@ import time
 import cv2
 import os
 
+import flask
+import threading
+from flask import request, jsonify
+
+def webServer():
+
+    app = flask.Flask(__name__)
+    @app.route('/', methods=['GET'])
+    def webAPI():
+        return jsonify(maskStatus)
+
+    # app.run(debug=True)
+    app.run()
+
+webServerThread = threading.Thread(target=webServer)
+webServerThread.start()
+
 parser = argparse.ArgumentParser()
 parser.add_argument("--arduino","-a", dest='COM',help="the com port of the arduino, ex: com4")
 args = parser.parse_args()
@@ -21,18 +38,18 @@ args = parser.parse_args()
 print(args)
 #import serial and start serial communication
 if args.COM is not None:
-	s = serial.Serial(args.COM, 9600, timeout=5) 
+	s = serial.Serial(args.COM, 9600, timeout=5)
 
-#Simple logger library :D 
+#Simple logger library :D
 class Logger:
 	def info(self,text,idk = False):
 		print('\033[94m [INFO] '+text+'\033[0m',end='' if idk else '\n')
 	def ok(self,text,idk = False):
 		print('\033[92m [OK] '+text+'\033[0m',end='' if idk else '\n')
 	def warn(self,text,idk = False):
-		print('\033[93m [WARN] '+text+'\033[0m',end='' if idk else '\n')	
+		print('\033[93m [WARN] '+text+'\033[0m',end='' if idk else '\n')
 	def fail(self,text,idk = False):
-		print('\033[91m [FAIL] '+text+'\033[0m',end='' if idk else '\n')		
+		print('\033[91m [FAIL] '+text+'\033[0m',end='' if idk else '\n')
 logger = Logger()
 
 #Loading things up
@@ -73,7 +90,7 @@ while True:
 
 	blob = cv2.dnn.blobFromImage(frame, 1.0, (300,300), (104.0, 177.0, 123.0)) 	#make a blob from the camera pic for the face detector
 
-	#pass the blob through the network 
+	#pass the blob through the network
 	faceDetector.setInput(blob)
 	detections = faceDetector.forward()
 
@@ -85,7 +102,7 @@ while True:
 	#process the faces to arrays
 	for i in range(0, detections.shape[2]):
 		confidence = detections[0, 0, i, 2]
-		
+
 		if confidence > 0.5:
 			(startX, startY, endX, endY) = np.multiply(
 				detections[0, 0, i, 3:7],
@@ -129,14 +146,25 @@ while True:
 		(mask, withoutMask) = preds
 
 		havemask = mask > withoutMask
-
-		label = "Mask" if havemask else "No Mask"
-		color = (0, 255, 0) if havemask else (0, 0, 255)
+		if havemask:
+			label = "Mask"
+			color = (0, 255, 0)
+			maskStatus = {
+				"prettyStatus": "Wearing mask",
+				"shortStatus": True
+			}
+		else:
+			label = "No Mask"
+			color = (0, 0, 255)
+			maskStatus = {
+				"prettyStatus": "Not wearing mask",
+				"shortStatus": False
+			}
 
 		#send data to arduino
 		if args.COM is not None:
-			s.write('1' if havemask else '0'.encode()) 
-		
+			s.write('1' if havemask else '0'.encode())
+
 		label = "{}: {:.2f}%".format(label, max(mask, withoutMask) * 100)
 
 		cv2.putText(frame, label, (aX, aY - 10),cv2.FONT_HERSHEY_SIMPLEX, 0.40, color, 2)
@@ -148,8 +176,6 @@ while True:
 	key = cv2.waitKey(1) & 0xFF
 	if key == ord("q"):
 		break
-
-
 
 cv2.destroyAllWindows()
 vs.stop()
