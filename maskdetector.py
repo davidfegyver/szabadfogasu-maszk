@@ -31,17 +31,13 @@ def webServer():
 
 # check command-line arguments
 parser = argparse.ArgumentParser()
-parser.add_argument("--arduino","-a", dest='COM',help="The COM port of the arduino, ex: com4")
-parser.add_argument("--port", "-p", dest="PORT",help="Define the port of the web API (default: 5000)")
+parser.add_argument("--arduino","-a", dest='COM', help="The COM port of the arduino, ex: com4")
+parser.add_argument("--port", "-p", dest="PORT", help="Define the port of the web API (default: 5000)")
+parser.add_argument("--ipcam", "-ip", dest="IP", help="The URL of the IP Camera ()")
 args = parser.parse_args()
 
-print(args)
-
 #import serial and start serial communication
-if args.PORT is not None:
-    webServerPort = args.PORT
-else:
-    webServerPort = 5000
+webServerPort = args.PORT or 5000
 if args.COM is not None:
 	s = serial.Serial(args.COM, 9600, timeout=5)
 # start the webserver thread
@@ -76,7 +72,9 @@ logger.ok("Done")
 
 
 logger.info("Starting video capture...",True)
-vs = VideoStream(src=0).start()
+print(args.IP)
+print(args.IP or 0)
+vs = VideoStream(src=args.IP or 0).start()
 time.sleep(2.0)
 logger.ok("Done")
 
