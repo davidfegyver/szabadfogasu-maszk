@@ -72,8 +72,6 @@ logger.ok("Done")
 
 
 logger.info("Starting video capture...",True)
-print(args.IP)
-print(args.IP or 0)
 vs = VideoStream(src=args.IP or 0).start()
 time.sleep(2.0)
 logger.ok("Done")
@@ -156,6 +154,7 @@ while True:
 			label = "Mask"
 			color = (0, 255, 0)
 			maskStatus = {
+				"faces": zip(locations, predictions),
 				"prettyStatus": "Wearing mask",
 				"shortStatus": True
 			}
@@ -163,6 +162,7 @@ while True:
 			label = "No Mask"
 			color = (0, 0, 255)
 			maskStatus = {
+				"faces": zip(locations, predictions),
 				"prettyStatus": "Not wearing mask",
 				"shortStatus": False
 			}
