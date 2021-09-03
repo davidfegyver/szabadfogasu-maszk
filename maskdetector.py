@@ -18,27 +18,35 @@ import flask
 import threading
 from flask import request, jsonify
 
+# declare maskStatus json
+maskStatus = {}
+# define the webserver thread
 def webServer():
-
     app = flask.Flask(__name__)
     @app.route('/', methods=['GET'])
     def webAPI():
         return jsonify(maskStatus)
 
-    # app.run(debug=True)
-    app.run()
+    app.run(port=webServerPort)
 
-webServerThread = threading.Thread(target=webServer)
-webServerThread.start()
-
+# check command-line arguments
 parser = argparse.ArgumentParser()
-parser.add_argument("--arduino","-a", dest='COM',help="the com port of the arduino, ex: com4")
+parser.add_argument("--arduino","-a", dest='COM',help="The COM port of the arduino, ex: com4")
+parser.add_argument("--port", "-p", dest="PORT",help="Define the port of the web API (default: 5000)")
 args = parser.parse_args()
 
 print(args)
+
 #import serial and start serial communication
+if args.PORT is not None:
+    webServerPort = args.PORT
+else:
+    webServerPort = 5000
 if args.COM is not None:
 	s = serial.Serial(args.COM, 9600, timeout=5)
+# start the webserver thread
+webServerThread = threading.Thread(target=webServer)
+webServerThread.start()
 
 #Simple logger library :D
 class Logger:
