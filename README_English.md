@@ -17,6 +17,7 @@ This makes our life safer.
 
 ## :star: Functions
 * Automatic mask detection
+* Web API to check maskwearing status
 * Arduino-based door opening (with relay)
 * Arduino-based leds (Red - no mask; Green - wearing mask (in case, the door is opening))
 * Arduino-based alarm, which turns on if you don't have a mask on
@@ -51,7 +52,7 @@ And build a circuit like that:
 ![arduino schema](https://github.com/davidfegyver/szabadfogasu-maszk/blob/main/arduino/schema.png)
 
 #### Using the web API
-You can obtain JSON code from the web API at the port `5000`. The web API supports two different styling method: `prettyStatus`, and `shortStatus`.
+You can obtain JSON code from the web API at the port `5000` (if it was not overwritten with the `-p` argument). The web API supports two different styling method: `prettyStatus`, and `shortStatus`.
 
 Examples with the JSON processor called `JQ` in a GNU/Linux-based system:
 
@@ -81,6 +82,11 @@ If you would like to use your Arduino, then append this flag: -a COM4 (number of
 ```
 $ python3 maskdetector.py -a COM4
 ```
+If you would like to specify the port of the webserver, then append this flag: -p 8080 (number of port)
+```
+$ python3 maskdetector.py -p 8080
+```
+
 
 Wait for the program to start. If everything was succesfull, then you will see the preview of your webcam, and the program will display your mask-wearing-status.
 

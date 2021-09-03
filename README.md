@@ -15,6 +15,7 @@ Ez biztonságosabbá teszi az dolgozók munkáját, és az emberek életét.
 
 ## :star: Funkciók
 * Maszk érzékelés
+* Webes API a maszkviselés ellenőrzéséhez (BÉTA)
 * Arduino-alapú ajtónyitás (relével)
 * Arduino-alapú ledek (Piros - Nincs maszk, Zöld - Van (Ekkor nyit ki az ajtó))
 * Arduino-alapú riasztó, ami bekapcsol ha nincs rajtad maszk
@@ -49,7 +50,7 @@ Töltsd fel ezt a kódot: [`maszk.ino`](https://github.com/davidfegyver/szabadfo
 ![arduino schema](https://github.com/davidfegyver/szabadfogasu-maszk/blob/main/arduino/schema.png)
 
 #### Webes API használata
-A webes API-ból adatokat lekérni JSON formázással lehet az `5000`-es porton. A webes API kétféle formátumot támogat: a `prettyStatus`, és a `shortStatus` formátumot
+A webes API-ból adatokat lekérni JSON formázással lehet az `5000`-es porton (ha nincs felülírva a `-p` argumentummal). A webes API kétféle formátumot támogat: a `prettyStatus`, és a `shortStatus` formátumot
 
 Példák a JQ JSON feldolgozóval GNU/Linux alatt:
 
@@ -78,6 +79,10 @@ $ python3 maskdetector.py
 Ha van arduinod, add hozzá ezt: -a COM4 (comport száma)
 ```
 $ python3 maskdetector.py -a COM4
+```
+Ha szeretnéd specifikálni a webszerver portját, akkor pedig add hozzá ezt: -p 8080 (port száma)
+```
+$ python3 maskdetector.py -p 8080
 ```
 
 Várd meg, amíg elindul a program. Ha minden sikeres akkor be fog jönni a kamerád képe, és láthatod hogy van-e rajtad maszk.
