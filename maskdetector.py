@@ -22,12 +22,12 @@ from flask import request, jsonify
 maskStatus = {}
 # define the webserver thread
 def webServer():
-    app = flask.Flask(__name__)
-    @app.route('/', methods=['GET'])
-    def webAPI():
-        return jsonify(maskStatus)
+	app = flask.Flask(__name__)
+	@app.route('/', methods=['GET'])
+	def webAPI():
+		return jsonify(maskStatus)
 
-    app.run(port=webServerPort)
+	app.run(port=webServerPort)
 
 # check command-line arguments
 parser = argparse.ArgumentParser()
@@ -154,7 +154,7 @@ while True:
 			label = "Mask"
 			color = (0, 255, 0)
 			maskStatus = {
-				"faces": zip(locations, predictions),
+				# "faces": zip(locations, predictions),
 				"prettyStatus": "Wearing mask",
 				"shortStatus": True
 			}
@@ -162,7 +162,7 @@ while True:
 			label = "No Mask"
 			color = (0, 0, 255)
 			maskStatus = {
-				"faces": zip(locations, predictions),
+				# "faces": zip(locations, predictions),
 				"prettyStatus": "Not wearing mask",
 				"shortStatus": False
 			}
