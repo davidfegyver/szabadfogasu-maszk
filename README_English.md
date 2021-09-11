@@ -88,7 +88,7 @@ $ python3 maskdetector.py -p 8080
 ```
 
 
-Wait for the program to start. If everything was succesfull, then you will see the preview of your webcam, and the program will display your mask-wearing-status.
+Wait for the program to start. If everything was successful, then you will see the preview of your webcam, and the program will display your mask-wearing-status.
 
 ## Showcase video
 https://www.youtube.com/watch?v=eLyNWEL1Los
