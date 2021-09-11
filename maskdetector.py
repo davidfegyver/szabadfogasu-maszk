@@ -27,7 +27,7 @@ def webServer():
 	def webAPI():
 		return jsonify(maskStatus)
 
-	app.run(port=webServerPort)
+	app.run(port=webServerPort, host="0.0.0.0")
 
 # check command-line arguments
 parser = argparse.ArgumentParser()
