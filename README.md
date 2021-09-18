@@ -1,9 +1,11 @@
 [Switch to English :england:](https://github.com/davidfegyver/szabadfogasu-maszk/blob/main/README_English.md)
 # <p align="center"> Egy Maszk érzékelős ajtó/jelző rendszer (Maszkimum) </p>
+
 ## <p align="center"> Egy projekt a  C3 Szabadfogású Számítógép versenyére<p>
 <img src="https://github.com/davidfegyver/szabadfogasu-maszk/blob/main/c3verseny.png" width="250"/>
 
 ### :star::star: Nyerteem!!
+
 ##### Köszönöm a C3 alapítványnak és a Számlázz.hu IT vezetőjének a kiválasztást! Az értékelőt/verseny bemutatóját erről a projektről [ITT](https://verseny.c3.hu/2020/#nyertesek/FD) tudjátok megnézni.
 
 Itt a nyakunkon a második hullám.
@@ -29,19 +31,18 @@ Minden telepítendő könyvtár fel van sorolva a  [`requirements.txt`](https://
 0. Nyiss meg egy terminált/parancssort.
 
 1. Töltsd le a repot:
-```
+``` bash
 $ git clone https://github.com/davidfegyver/szabadfogasu-maszk/
 ```
 
 2. Lépj be a letöltött mappába:
-```
+``` bash
 $ cd szabadfogasu-maszk/
 ```
 
 3. Most írd be ezt a parancsot, hogy telepítsd a szükséges könyvtárakat. Ez sok idő lehet a neted sebességétől függően.
-```
+```bash
 $ pip3 install -r requirements.txt
-
 ```
 #### Arduino beállítása (Nem kötelező)
 Töltsd fel ezt a kódot: [`maszk.ino`](https://github.com/davidfegyver/szabadfogasu-maszk/blob/main/arduino/maszk.ino) (`wget https://github.com/davidfegyver/szabadfogasu-maszk/blob/main/arduino/maszk.ino`, vagy `curl -o ./maszk.ino https://github.com/davidfegyver/szabadfogasu-maszk/blob/main/arduino/maszk.ino`)
@@ -49,7 +50,25 @@ Töltsd fel ezt a kódot: [`maszk.ino`](https://github.com/davidfegyver/szabadfo
 Építs egy ilyesmi áramkört:
 ![arduino schema](https://github.com/davidfegyver/szabadfogasu-maszk/blob/main/arduino/schema.png)
 
-#### Webes API használata
+## :bulb: Futtatás
+
+1. Nyisd meg a terminált, lépj be a letöltött mappába, és futtasd ezt a parancsot:
+```bash
+$ python3 maskdetector.py
+```
+Ha van arduinod, add hozzá ezt: -a COM4 (comport száma)
+```bash
+$ python3 maskdetector.py -a COM4
+```
+Ha szeretnéd specifikálni a webszerver portját, akkor pedig add hozzá ezt: -p 8080 (port száma)
+```bash
+$ python3 maskdetector.py -p 8080
+```
+
+Várd meg, amíg elindul a program. Ha minden sikeres akkor be fog jönni a kamerád képe, és láthatod hogy van-e rajtad maszk.
+
+## Webes API használata
+
 A webes API-ból adatokat lekérni JSON formázással lehet az `5000`-es porton (ha nincs felülírva a `-p` argumentummal). A webes API kétféle formátumot támogat: a `prettyStatus`, és a `shortStatus` formátumot
 
 Példák a JQ JSON feldolgozóval GNU/Linux alatt:
@@ -70,24 +89,8 @@ Kimenet:
 
 `False`
 
-## :bulb: Futtatás
-
-1. Nyisd meg a terminált, lépj be a letöltött mappába, és futtasd ezt a parancsot:
-```
-$ python3 maskdetector.py
-```
-Ha van arduinod, add hozzá ezt: -a COM4 (comport száma)
-```
-$ python3 maskdetector.py -a COM4
-```
-Ha szeretnéd specifikálni a webszerver portját, akkor pedig add hozzá ezt: -p 8080 (port száma)
-```
-$ python3 maskdetector.py -p 8080
-```
-
-Várd meg, amíg elindul a program. Ha minden sikeres akkor be fog jönni a kamerád képe, és láthatod hogy van-e rajtad maszk.
-
 ## Bemutató videó
+
 https://www.youtube.com/watch?v=eLyNWEL1Los
 
 ## 🖥️ Felhasznált könyvtárak/projektek
@@ -102,10 +105,12 @@ https://www.youtube.com/watch?v=eLyNWEL1Los
   * További ötletek jöhetnek pull requestben :)
 
 ## 🎉 Köszi, hogy végigolvastad
+
 Ha bármi problémád akadt, akkor kérlek írj nekem egy emailt: `fegyverdavid.bator@gmail.com`, vagy nyiss egy Issuet itt: [Szabadfogasu-maszk](https://github.com/davidfegyver/szabadfogasu-maszk/issues)
 
 
 ## :handshake: Hozzájárulás
+
 Ha lenne valami ötleted, vagy kijavítanál egy bugot, akkor nyiss egy **Pull requestet**.
 
 Hozzájárulók:
