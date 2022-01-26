@@ -116,7 +116,7 @@ If you got any idea, or you want to fix a bug, then please open a **Pull request
 
 Contributors:
 - [Fegyver Dávid](https://github.com/davidfegyver)
-- [PiciAkk](https://github.com/piciakk)
+- [Székely Márton](https://github.com/piciakk)
 
 **If you liked the project, give me a star :D**
 

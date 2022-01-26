@@ -1,5 +1,5 @@
 [Switch to English :england:](https://github.com/davidfegyver/szabadfogasu-maszk/blob/main/README_English.md)
-# <p align="center"> Egy Maszk érzékelős ajtónyitó/jelző rendszer (Maszkimum) </p>
+# <p align="center"> Egy maszkérzékelős ajtónyitó/jelző rendszer (Maszkimum) </p>
 
 ## <p align="center"> Egy projekt a  C3 Szabadfogású Számítógép versenyére<p>
 <img src="https://github.com/davidfegyver/szabadfogasu-maszk/blob/main/c3verseny.png" width="250"/>
@@ -9,14 +9,14 @@
 ##### Köszönöm a C3 alapítványnak és a Számlázz.hu IT vezetőjének a kiválasztást! Az értékelőt/verseny bemutatóját erről a projektről [ITT](https://verseny.c3.hu/2020/#nyertesek/FD) tudjátok megnézni.
 
 Itt a nyakunkon a második hullám.
-A kormány rendeleteket hozott. Kötelező a maszkviselés a tömegközlekedési eszközökön, üzletekben, moziban, és sok helyen az iskolákban is.  
+A kormány rendeleteket hozott. Kötelező a maszkviselés a tömegközlekedési eszközökön, üzletekben, moziban és sok helyen az iskolákban is.  
 
-Ez a maszk érzékelős ajtó megakadályozza a koronavírussal nem törődő embereket attól, hogy belépjenek például a könyvtárba, bevásárlóközpontokba és zárt helyekre, így nem kell a biztonsági őröknek ezekre az emberekre figyelni.
+Ez a maszkérzékelős ajtó megakadályozza a koronavírussal nem törődő embereket attól, hogy belépjenek például a könyvtárakba, bevásárlóközpontokba és zárt helyekre, így nem kell a biztonsági őröknek ezekre az emberekre figyelni.
 Ez biztonságosabbá teszi az dolgozók munkáját, és az emberek életét.
 
 
 ## :star: Funkciók
-* Maszk érzékelés
+* Maszkérzékelés
 * Webes API a maszkviselés ellenőrzéséhez (BÉTA)
 * Arduino-alapú ajtónyitás (relével)
 * Arduino-alapú ledek (Piros - Nincs maszk, Zöld - Van (Ekkor nyit ki az ajtó))
@@ -69,7 +69,7 @@ Várd meg, amíg elindul a program. Ha minden sikeres akkor be fog jönni a kame
 
 ## Webes API használata
 
-A webes API-ból adatokat lekérni JSON formázással lehet az `5000`-es porton (ha nincs felülírva a `-p` argumentummal). A webes API kétféle formátumot támogat: a `prettyStatus`, és a `shortStatus` formátumot
+A webes API-ból adatokat lekérni JSON formázással lehet az `5000`-es porton (ha nincs felülírva a `-p` argumentummal). A webes API kétféle formátumot támogat: a `prettyStatus`, és a `shortStatus` formátumot.
 
 Példák a JQ JSON feldolgozóval GNU/Linux alatt:
 
@@ -89,7 +89,7 @@ Kimenet:
 
 `False`
 
-## Bemutató videó
+## Bemutatóvideó
 
 https://www.youtube.com/watch?v=eLyNWEL1Los
 
@@ -115,7 +115,7 @@ Ha lenne valami ötleted, vagy kijavítanál egy bugot, akkor nyiss egy **Pull r
 
 Hozzájárulók:
 - [Fegyver Dávid](https://github.com/davidfegyver)
-- [PiciAkk](https://github.com/piciakk)
+- [Székely Márton](https://github.com/piciakk)
 
 **Ha tetszett a projekt, adhadsz is egy csillagot :D**
 
