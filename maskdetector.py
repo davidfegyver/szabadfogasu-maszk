@@ -15,6 +15,7 @@ import cv2
 import os
 
 import flask
+from waitress import serve
 import threading
 from flask import request, jsonify
 import json
@@ -24,11 +25,9 @@ maskStatus = {}
 # define the webserver thread
 def webServer():
 	app = flask.Flask(__name__)
-	@app.route('/', methods=['GET'])
-	def webAPI():
-		return jsonify(maskStatus)
+	app.route('/', methods=['GET'])(lambda: jsonify(maskStatus))
 
-	app.run(port=webServerPort, host="0.0.0.0")
+	serve(app, host="0.0.0.0", port=webServerPort)
 
 # check command-line arguments
 parser = argparse.ArgumentParser()
@@ -37,7 +36,7 @@ parser.add_argument("--port", "-p", dest="PORT", help="Define the port of the we
 parser.add_argument("--ipcam", "-ip", dest="IP", help="The URL of the IP Camera ()")
 args = parser.parse_args()
 
-#import serial and start serial communication
+# import serial and start serial communication
 webServerPort = args.PORT or 5000
 if args.COM is not None:
 	s = serial.Serial(args.COM, 9600, timeout=5)
@@ -45,7 +44,7 @@ if args.COM is not None:
 webServerThread = threading.Thread(target=webServer)
 webServerThread.start()
 
-#Simple logger library :D
+# Simple logger library :D
 class Logger:
 	def info(self,text,idk = False):
 		print('\033[94m [INFO] '+text+'\033[0m',end='' if idk else '\n')
@@ -57,7 +56,7 @@ class Logger:
 		print('\033[91m [FAIL] '+text+'\033[0m',end='' if idk else '\n')
 logger = Logger()
 
-#Loading things up
+# Loading things up
 logger.info("Loading Face Detector... ",True)
 faceDetector = cv2.dnn.readNet("./face_detector/deploy.prototxt", "./face_detector/res10_300x300_ssd_iter_140000.caffemodel")
 logger.ok("Done")
@@ -77,12 +76,12 @@ vs = VideoStream(src=args.IP or 0).start()
 time.sleep(2.0)
 logger.ok("Done")
 
-#check starting time for fps counting
+# check starting time for fps counting
 start = time.time()
 
 while True:
 
-	frame=vs.read() #read the camera
+	frame=vs.read() # read the camera
 	if frame is None:
 		logger.warn("The video frame is None. Check your input.")
 		time.sleep(1)
@@ -93,9 +92,9 @@ while True:
 	(height, width) = frame.shape[:2]
 
 
-	blob = cv2.dnn.blobFromImage(frame, 1.0, (300,300), (104.0, 177.0, 123.0)) 	#make a blob from the camera pic for the face detector
+	blob = cv2.dnn.blobFromImage(frame, 1.0, (300,300), (104.0, 177.0, 123.0)) # make a blob from the camera pic for the face detector
 
-	#pass the blob through the network
+	# pass the blob through the network
 	faceDetector.setInput(blob)
 	detections = faceDetector.forward()
 
@@ -104,7 +103,7 @@ while True:
 	predictions = []
 
 
-	#process the faces to arrays
+	# process the faces to arrays
 	for i in range(0, detections.shape[2]):
 		confidence = detections[0, 0, i, 2]
 
@@ -112,13 +111,13 @@ while True:
 			(startX, startY, endX, endY) = np.multiply(
 				detections[0, 0, i, 3:7],
 				[width, height, width, height]
-			).astype("int") #get the bounding box of the face
+			).astype("int") # get the bounding box of the face
 
 			(startX, startY) = (max(0, startX), max(0, startY))
 			(endX, endY) = (min(width - 1, endX), min(height - 1, endY))
 
-			#grab the face and convert to rgb (because the predictor can only process rgb)
-			#and resize it
+			# grab the face and convert to rgb (because the predictor can only process rgb)
+			# and resize it
 			face = frame[startY:endY, startX:endX]
 			try:
 				face = cv2.cvtColor(face, cv2.COLOR_BGR2RGB)
@@ -140,12 +139,12 @@ while True:
 		if args.COM is not None:
 			s.write('2'.encode())
 
-	#show fps
+	# show fps
 	fps_str = "FPS: %.2f" % (1 / (time.time() - start))
 	start = time.time()
 	cv2.putText(frame, fps_str, (25, 25), cv2.FONT_HERSHEY_SIMPLEX, 0.45, (255,0, 0), 2)
 
-	#loop through all faces and add it to the end photo
+	# loop through all faces and add it to the end photo
 	for (box, preds) in zip(locations, predictions):
 		(aX, aY, bX, bY) = box
 		(mask, withoutMask) = preds
@@ -155,7 +154,7 @@ while True:
 			label = "Mask"
 			color = (0, 255, 0)
 			maskStatus = {
-				# "faces": zip(locations, predictions),
+				#"faces": zip(locations, predictions),
 				"prettyStatus": "Wearing mask",
 				"shortStatus": True
 			}
@@ -163,12 +162,12 @@ while True:
 			label = "No Mask"
 			color = (0, 0, 255)
 			maskStatus = {
-				# "faces": zip(locations, predictions),
+				#"faces": zip(locations, predictions),
 				"prettyStatus": "Not wearing mask",
 				"shortStatus": False
 			}
 
-		#send data to arduino
+		# send data to arduino
 		if args.COM is not None:
 			s.write('1' if havemask else '0'.encode())
 
@@ -178,7 +177,7 @@ while True:
 		cv2.rectangle(frame, (aX, aY), (bX, bY), color, 2)
 
 
-	#show the frame
+	# show the frame
 	cv2.imshow("Mask Detector by davidfegyver", frame)
 	key = cv2.waitKey(1) & 0xFF
 	if key == ord("q"):
